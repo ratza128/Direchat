@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Direchat</string>
+    <string name="dialogTitle">"Choose your device name"</string>
+    <string name="btn_send">Send</string>
+    <string name="txt_hint">Type Message</string>
+    <string name="ip_not_available">IP not available</string>
+</resources>
