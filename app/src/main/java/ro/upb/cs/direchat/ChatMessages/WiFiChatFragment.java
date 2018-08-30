@@ -1,6 +1,6 @@
 package ro.upb.cs.direchat.ChatMessages;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,8 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.upb.cs.direchat.ChatMessages.WaitingToSend.WaitingToSendQueue;
+import ro.upb.cs.direchat.DestinationDeviceTabList;
+import ro.upb.cs.direchat.R;
 import ro.upb.cs.direchat.Services.ServiceList;
 import ro.upb.cs.direchat.Services.WiFiP2pService;
+import ro.upb.cs.direchat.Sockets.ChatManager;
 
 /**
  * Clasa ce prelucreaza UI chat-ului
@@ -86,7 +89,7 @@ public class WiFiChatFragment extends Fragment {
         Log.d(TAG, "sendForcedWaitingToSendQueue() called");
 
         String combinedMessages = "";
-        List<String> listCopy = WaitingToSendQueue.getInstance().getWaitingToSendItemsList(tabNumber);
+        List<String> listCopy = WaitingToSendQueue.getInstace().getWaitingToSendItemsList(tabNumber);
         for(String message : listCopy) {
             if (!message.equals("") && message.equals("\n")) {
                 combinedMessages = combinedMessages + "\n" + message;
@@ -98,7 +101,7 @@ public class WiFiChatFragment extends Fragment {
         if (chatManager != null){
             if (!chatManager.isDisable()) {
                 chatManager.write((combinedMessages).getBytes());
-                WaitingToSendQueue.getInstance().getWaitingToSendItemsList(tabNumber).clear();
+                WaitingToSendQueue.getInstace().getWaitingToSendItemsList(tabNumber).clear();
             } else
             {
                 Log.d(TAG, "ChatManager disabled, imposible to send the queued combined message");
@@ -130,7 +133,7 @@ public class WiFiChatFragment extends Fragment {
      * si incearca sa sa reconecteze la serviciul asociat deviceului din tab (cu indexul tabNumber)
      */
     public void addToWaitingToSendQueueAndTryReconnect() {
-        WaitingToSendQueue.getInstance().getWaitingToSendItemsList(tabNumber).add(chatLine.getText().toString());
+        WaitingToSendQueue.getInstace().getWaitingToSendItemsList(tabNumber).add(chatLine.getText().toString());
 
         WifiP2pDevice device = DestinationDeviceTabList.getInstance().getDevice(tabNumber - 1);
         if (device != null) {

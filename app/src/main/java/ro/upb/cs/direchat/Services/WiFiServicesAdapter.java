@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ro.upb.cs.direchat.R;
+
 import org.w3c.dom.Text;
 
 /**
@@ -25,6 +27,10 @@ public class WiFiServicesAdapter extends RecyclerView.Adapter<WiFiServicesAdapte
     public WiFiServicesAdapter(@NonNull ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
         setHasStableIds(true);
+    }
+
+    public interface ItemClickListener {
+        void itemClicked(final View view);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import ro.upb.cs.direchat.R;
+
 /**
  * Clasa este ArrayAdapter care reprezinta datele din
  * {@link ro.upb.cs.direchat.ChatMessages.WiFiChatFragment}

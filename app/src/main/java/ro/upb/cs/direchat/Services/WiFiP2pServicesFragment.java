@@ -1,6 +1,7 @@
 package ro.upb.cs.direchat.Services;
 
-import android.app.Fragment;
+import android.content.res.Resources;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
@@ -17,6 +18,7 @@ import org.w3c.dom.Text;
 
 import ro.upb.cs.direchat.MainActivity;
 import ro.upb.cs.direchat.Model.LocalP2PDevice;
+import ro.upb.cs.direchat.R;
 import ro.upb.cs.direchat.Services.LocalDeviceGUI.LocalDeviceDialogFragment;
 
 
@@ -89,11 +91,11 @@ public class WiFiP2pServicesFragment extends Fragment implements WiFiServicesAda
      * Metoda ce afiseaza pictograma group ownerului in card view-ul device-ului local
      */
     public void showLocalDeviceGoIcon(){
-         if (getView() != null && getView().findViewById(R.id.groupOwnerLogo) != null && getView().findViewById(R.id.i_am_a_go_textview) != null){
-             ImageView groupOwnerLogo = (ImageView) getView().findViewById(R.id.groupOwnerLogo);
+         if (getView() != null && getView().findViewById(R.id.go_logo) != null && getView().findViewById(R.id.i_am_a_go_textview) != null){
+             ImageView groupOwnerLogo = (ImageView) getView().findViewById(R.id.go_logo);
              TextView i_am_a_go_textview = (TextView) getView().findViewById(R.id.i_am_a_go_textview);
 
-             groupOwnerLogo.setImageDrawable(getResources().getDrawable(android.R.drawable.go_logo));
+             groupOwnerLogo.setImageResource(R.drawable.go_logo);
              groupOwnerLogo.setVisibility(View.VISIBLE);
              i_am_a_go_textview.setVisibility(View.VISIBLE);
          }
@@ -137,7 +139,7 @@ public class WiFiP2pServicesFragment extends Fragment implements WiFiServicesAda
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(android.R.layout.services_list,container, false);
+        View rootView = inflater.inflate(R.layout.service_list,container, false);
         rootView.setTag(TAG);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -160,7 +162,7 @@ public class WiFiP2pServicesFragment extends Fragment implements WiFiServicesAda
         TextView localDeviceAddressText = (TextView) rootView.findViewById(R.id.localDeviceAddress);
         localDeviceAddressText.setText(LocalP2PDevice.getInstance().getLocalDevice().deviceAddress);
 
-        CardView cardView = (CardView) rootView.findViewById(R.id.cardViewLocalDevice);
+        CardView cardView = (CardView) rootView.findViewById(R.id.cardviewLocalDevice);
         cardView.setOnClickListener(new OnClickListenerLocalDevice(this));
 
         return rootView;

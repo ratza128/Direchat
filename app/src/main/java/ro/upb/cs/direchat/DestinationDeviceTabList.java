@@ -88,4 +88,14 @@ public class DestinationDeviceTabList {
             destinationDeviceList.add(device);
         }
     }
+
+    public boolean containsElement(P2pDestinationDevice device){
+        if (destinationDeviceList.contains(device))
+            return true;
+        else return false;
+    }
+
+    public int indexOf(P2pDestinationDevice device) {
+        return destinationDeviceList.indexOf(device);
+    }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import ro.upb.cs.direchat.R;
 
 
 /**
@@ -52,9 +53,9 @@ public class LocalDeviceDialogFragment extends DialogFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View v = inflater.inflate(android.R.layout..la.layout., container, false);
+        View v = inflater.inflate(R.layout.dialog, container, false);
 
-        getDialog().setTitle(getResources().getString(R.));
+        getDialog().setTitle("Choose your device name");
         deviceNameEditText = (EditText) v.findViewById(R.id.deviceNameEditText);
         confirmButton = (Button) v.findViewById(R.id.confirmButton);
 

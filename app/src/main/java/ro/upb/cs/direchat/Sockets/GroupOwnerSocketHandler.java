@@ -10,7 +10,7 @@ import java.net.Socket;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Handler;
+import android.os.Handler;
 
 import ro.upb.cs.direchat.Configuration;
 

@@ -49,7 +49,6 @@ import ro.upb.cs.direchat.Services.WiFiServicesAdapter;
 import ro.upb.cs.direchat.Sockets.ChatManager;
 import ro.upb.cs.direchat.Sockets.ClientSocketHandler;
 import ro.upb.cs.direchat.Sockets.GroupOwnerSocketHandler;
-import sun.applet.Main;
 
 public class MainActivity extends AppCompatActivity implements
         WiFiP2pServicesFragment.DeviceClickListener,
@@ -66,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements
     private boolean discoveryStatus = true;
 
     private TabFragment tabFragment;
-    private Toolbar toolbar;
+    private android.support.v7.widget.Toolbar toolbar;
     private WifiP2pManager manager;
     private WifiP2pDnsSdServiceRequest serviceRequest;
     private WifiP2pManager.Channel channel;
@@ -94,9 +93,9 @@ public class MainActivity extends AppCompatActivity implements
         return tabFragment;
     }
 
-    Toolbar getToolbar() { return toolbar; }
+    android.support.v7.widget.Toolbar getToolbar() { return toolbar; }
 
-    public void setToolbar(Toolbar toolbar) { this.toolbar = toolbar;}
+    public void setToolbar(android.support.v7.widget.Toolbar toolbar) { this.toolbar = toolbar;}
 
     public void setConnected(boolean connected) { this.connected = connected; }
 
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements
 
             ServiceList.getInstance().clear();
             //TODO TODO TODO iconita
-            toolbar.getMenu().findItem(R.id.discovery).setIcon(getResources().getDrawable(R.drawable));
+            toolbar.getMenu().findItem(R.id.discovery).setIcon(getResources().getDrawable(R.drawable.ic_action_search_stopped));
 
             this.internalStopDiscovery();
         }
@@ -155,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements
 
     /**
      * Metoda ce opreste procesul de discovery prin manager
-     * {@link ro.upb.cs.direchat.Services.WifiP2pManager}
      */
     public void internalStopDiscovery() {
         manager.stopPeerDiscovery(channel,
@@ -284,10 +282,14 @@ public class MainActivity extends AppCompatActivity implements
      * GroupOwner socket sau Client socket
      */
     private void closeAndKillSocketHandler() {
-        if (socketHandler instanceof GroupOwnerSocketHandler) {
-            ((GroupOwnerSocketHandler) socketHandler).closeSocketAndKillThisThread();
-        } else{
-            ((ClientSocketHandler) socketHandler).closeSocketAndKillThisThread();
+        try {
+            if (socketHandler instanceof GroupOwnerSocketHandler) {
+                ((GroupOwnerSocketHandler) socketHandler).closeSocketAndKillThisThread();
+            } else {
+                ((ClientSocketHandler) socketHandler).closeSocketAndKillThisThread();
+            }
+        } catch (Exception e){
+            Log.e(TAG, "Exception closing groupOwner socket or client socket");
         }
     }
 
@@ -348,7 +350,7 @@ public class MainActivity extends AppCompatActivity implements
         Log.d(TAG, "connectP2p, tabNum before = " + tabNum);
 
         if (DestinationDeviceTabList.getInstance().containsElement(new P2pDestinationDevice(service.getDevice()))){
-            this.tabNum = DestinationDeviceTabList.getInstance().indexOfElement(new P2pDestinationDevice(service.getDevice()));
+            this.tabNum = DestinationDeviceTabList.getInstance().indexOf(new P2pDestinationDevice(service.getDevice()));
         }
 
         if (this.tabNum == -1)
@@ -501,7 +503,7 @@ public class MainActivity extends AppCompatActivity implements
      * ca supportActionBar in {@link android.support.v7.app.AppCompatActivity}
      */
     private void setupToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             toolbar.setTitle(getResources().getString(R.string.app_name));
             toolbar.setTitleTextColor(Color.WHITE);
@@ -665,7 +667,7 @@ public class MainActivity extends AppCompatActivity implements
 
         //vreau sa fiu sigur ca trimit mesaj catre alt device cu LocalDevice macAddress
         //Inainte, trebuie sa selectez tabNum corect, este posibil ca acest tabNum sa fie incorect
-        tabNum = DestinationDeviceTabList.getInstance().indexOfElement(p2pDestinationDevice) + 1;
+        tabNum = DestinationDeviceTabList.getInstance().indexOf(p2pDestinationDevice) + 1;
 
         Log.d(TAG, "handleMessage, updated tabNum = " + tabNum );
         Log.d(TAG, "handleMessage, chatManager!=null?" + (chatManager != null));
@@ -727,7 +729,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     protected void onRestart() {
-        Fragment frag = getSupportFragmentManager().findFragmentById("services");
+        Fragment frag = getSupportFragmentManager().findFragmentByTag("services");
         if (frag != null) {
             getSupportFragmentManager().beginTransaction().remove(frag).commit();
         }
@@ -762,7 +764,7 @@ public class MainActivity extends AppCompatActivity implements
                 updateServiceAdapter();
                 this.setTabFragmentToPage(0);
                 return true;
-            case R.id.disconnect:
+            case R.id.disconenct:
                 this.setTabFragmentToPage(0);
                 this.forceDisconnectAndStartDiscovery();
                 return true;

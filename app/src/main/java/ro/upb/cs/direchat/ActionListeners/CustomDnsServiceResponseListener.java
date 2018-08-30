@@ -34,9 +34,9 @@ public class CustomDnsServiceResponseListener implements WifiP2pManager.DnsSdSer
                 if (adapter != null)
                     adapter.notifyItemInserted(ServiceList.getInstance().getSize() - 1);
 
-                Log.D(TAG, "onDnsSdServiceAvailable " + instanceName);
+                Log.d(TAG, "onDnsSdServiceAvailable " + instanceName);
             }
             }
         }
-    }
 }
+

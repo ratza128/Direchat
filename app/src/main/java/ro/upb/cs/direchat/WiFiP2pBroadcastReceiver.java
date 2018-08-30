@@ -72,8 +72,8 @@ public class WiFiP2pBroadcastReceiver extends BroadcastReceiver{
 
                 //daca manualItemMenuDisconnectAndStartDiscovery() nu este activat de user
                 if (!((MainActivity)activity).isBlockForcedDiscoveryInBroadcastReceiver()) {
-                    ((MainActivity) activity).forceDiscoveryStop();
-                    ((MainActivity) activity).restartDescovery();
+                    ((MainActivity) activity).forcedDiscoveryStop();
+                    ((MainActivity) activity).restartDiscovery();
                 }
 
                 //Disable toateChatManager

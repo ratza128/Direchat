@@ -1,8 +1,9 @@
 package ro.upb.cs.direchat;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.graphics.pdf.PdfDocument;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -20,6 +21,8 @@ import java.util.Locale;
 
 import ro.upb.cs.direchat.ChatMessages.WiFiChatFragment;
 import ro.upb.cs.direchat.Services.WiFiP2pServicesFragment;
+
+import static android.media.CamcorderProfile.get;
 
 /**
  * Clasa ce reprezinta un fragment ca TAB
@@ -111,11 +114,11 @@ public class TabFragment extends android.support.v4.app.Fragment {
         public SectionsPagerAdapter(android.support.v4.app.FragmentManager fm) {super(fm);}
 
         @Override
-        public android.support.v4.app.Fragment getItem(int position) {
+        public Fragment getItem(int position) {
             if (position == 0)
                 return wiFiP2pServicesFragment;
             else
-                return wiFiChatFragmentList.get(position - 1);
+                return wiFiChatFragmentList.get(position);
         }
 
         @Override
