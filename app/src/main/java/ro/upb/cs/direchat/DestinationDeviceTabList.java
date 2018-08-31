@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ro.upb.cs.direchat.Model.P2pDestinationDevice;
+import ro.upb.cs.direchat.Utils.UseOnlyPrivate;
 
 /**
  * Clasa ce reprezinta lista tab-urilor cu
@@ -19,7 +20,7 @@ import ro.upb.cs.direchat.Model.P2pDestinationDevice;
  */
 public class DestinationDeviceTabList {
 
-    private final List<P2pDestinationDevice> destinationDeviceList;
+    @UseOnlyPrivate private final List<P2pDestinationDevice> destinationDeviceList;
 
     private static final DestinationDeviceTabList instance = new DestinationDeviceTabList();
 
